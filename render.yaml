@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: nova-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_KEY
+        sync: false
+      - key: DASHBOARD_PASSWORD
+        sync: false
+      - key: BASE_URL
+        sync: false
+      - key: OWNER_NUMBER
+        sync: false
+      - key: SESSION_PATH
+        value: /.nova-session
+      - key: LOG_LEVEL
+        value: info
+    disk:
+      name: nova-session
+      mountPath: /.nova-session
+      sizeGB: 1
